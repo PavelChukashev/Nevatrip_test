@@ -19,24 +19,35 @@ import React from 'react'
 //     {id: 7, complited: false, title: '21:55'},
 // ];
 
-function Departure() {
+// AtoB = {[ "18:00", "18:30", "18:45", "19:00", "19:15", "21:00" ]}
+// BtoA = {[ "18:30", "18:45", "19:00", "19:15", "19:35", "21:50", "21:55" ]}
+
+
+function Departure({
+    ba,
+    route,
+    times,
+    onChangeTime,
+}) {
+    const renderOption = () => {
+        let name = 'из A в B'
+
+        if (route === 'ba' || ba) {
+            name = 'из B в A'
+        } else if (route === 'aba') {
+            name = 'из A в B и обратно в А'
+        }
+
+        return times.map(time => (
+            <option key={time} value={time}>{`${time} ${name}`}</option>
+        ));
+    }
+
     return (
         <div className='time-container'>
             <label for="time">Выберите время</label>
-            <select name="time" id="time">
-            <option value="18:00(из A в B)">18:00(из A в B)</option>
-            <option value="18:30(из A в B)">18:30(из A в B)</option>
-            <option value="18:45(из A в B)">18:45(из A в B)</option>
-            <option value="19:00(из A в B)">19:00(из A в B)</option>
-            <option value="19:15(из A в B)">19:15(из A в B)</option>
-            <option value="21:00(из A в B)">21:00(из A в B)</option>
-            <option value="18:30(из B в A)">18:30(из B в A)</option>
-            <option value="18:45(из B в A)">18:45(из B в A)</option>
-            <option value="19:00(из B в A)">19:00(из B в A)</option>
-            <option value="19:15(из B в A)">19:15(из B в A)</option>
-            <option value="19:35(из B в A)">19:35(из B в A)</option>
-            <option value="21:50(из B в A)">21:50(из B в A)</option>
-            <option value="21:55(из B в A)">21:55(из B в A)</option>
+            <select name="time" id="time" onChange={onChangeTime}>
+                {renderOption()}
             </select>
         </div>
     )

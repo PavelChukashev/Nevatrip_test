@@ -1,14 +1,22 @@
 import React from 'react'
 
-function Route() {
+function Route({
+    routes,
+    onChangeRoute
+}) {
+    const renderOptions = () => {
+        return Object.keys(routes).map(key => (
+            <option key={key} value={key}>{routes[key].title}</option>
+        ));
+    }
+
     return (
         <div className="route-container">
             <label>Выберите направление</label>
-            <select name="route" id="route">
-                <option value="из A в B">из A в B</option>
-                <option value="из B в A">из B в A</option>
-                <option value="из A в B и обратно в А">из A в B и обратно в А</option>
+            <select name="route" id="route" onChange={onChangeRoute}>
+                {renderOptions()}
             </select>
+            <label htmlFor="route">Время пути в одну сторону составляет 50 минут</label>
         </div>
     )
 }

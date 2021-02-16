@@ -1,11 +1,14 @@
 import React from 'react'
 
-function Calculate() {
+function Calculate({
+    handleSubmit,
+    onChangeCount,
+}) {
     return (
         <div className="num-cantainer">
             <label for="num">Количество билетов</label>
-            <input id="num" />
-            <button>Посчитать</button>
+            <input id="num" onChange={onChangeCount}/>
+            <button onClick={handleSubmit}>Посчитать</button>
         </div>
     )
 }
