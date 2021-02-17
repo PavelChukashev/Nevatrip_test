@@ -1,0 +1,46 @@
+.App {
+  text-align: center;
+}
+
+header {
+  height: 10vh;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+}
+
+.route-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 20vh;
+}
+
+input {
+  width: 10vw;
+}
+
+select {
+  width: 200px;
+  height: 30px;
+}
+
+.time-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 20vh;
+}
+
+.num-cantainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 20vh;
+}
