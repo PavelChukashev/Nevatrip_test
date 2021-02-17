@@ -3,7 +3,14 @@
 }
 
 header {
+  display: flex;
   height: 10vh;
+  align-items: center;
+  background-color: azure;
+}
+
+h1 {
+  margin: 0 auto;
 }
 
 .main-container {
@@ -43,4 +50,13 @@ select {
   justify-content: space-around;
   align-items: center;
   height: 20vh;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: azure;
+  height: 10vh;
 }
