@@ -1,31 +1,52 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { increaseDateBy, FORMATS } from "../utils/time";
 
 function Time({ time, store, route, secondTime, onChangeTime }) {
+	const times = useMemo(() => store.times[route] || store.times["ab"], [
+		store,
+		route,
+	]);
+	const filteredTimes = useMemo(
+		() =>
+			times.filter(
+				(val) => val > increaseDateBy(time, 50).format(FORMATS.default)
+			),
+		[time, times]
+	);
+
 	const renderOption = (route, filter = false) => {
 		const name = store.routes[route].title;
-		const times = store.times[route] || store.times["ab"];
-		const filteredTimes = filter ? times.filter( (val) => val > increaseDateBy(time, 50).format(FORMATS.default) ) : times;
+		const filtered = filter ? filteredTimes : times;
 
-		return filteredTimes.map((value) => (
+		return filtered.map((value) => (
 			<option key={value} value={value}>{`${value} ${name}`}</option>
 		));
 	};
-	
+
 	const handleTimeChange = (event) => {
 		const { target } = event;
 
 		onChangeTime(target.id, target.value);
 	};
-	
+
+	useEffect(() => {
+		if (!time && !secondTime) {
+			if (route === "aba") {
+				onChangeTime("secondTime", filteredTimes[0]);
+			}
+
+			onChangeTime("time", times[0]);
+		}
+	}, [time, secondTime, route, times, onChangeTime, filteredTimes]);
+
 	const renderTime = () => {
 		return (
 			<>
-				<label>Выберите время</label>
+				<label htmlFor='time'>Выберите время</label>
 				<select name='time' id='time' value={time} onChange={handleTimeChange}>
 					{renderOption(route)}
 				</select>
-				{route === "aba" && time != '' && (
+				{route === "aba" && (
 					<select
 						name='time-second'
 						id='secondTime'

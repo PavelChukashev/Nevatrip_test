@@ -6,15 +6,8 @@ import { timeFromDate, increaseDateBy, FORMATS } from "../utils/time";
 const ticket = ["билет", "билета", "билетов"];
 
 function wordEnding(count, ticket) { 
-	if (count === 1){
-		return ticket[0]
-	}
-	if (count >1 && count <= 4) {
-		return ticket[1]
-	}
-	if (count >= 5) {
-		return ticket[2]
-	}
+	let cases = [2, 0, 1, 1, 1, 2]
+	return ticket[(count % 100 > 4 && count % 100 < 20) ? 2 : cases[(count % 10 < 5) ? count % 10 : 5]];
 }
 
 function Result({
